@@ -2,6 +2,7 @@ import itertools
 import numpy as np
 
 # Matrix function
+# Test Change
 def matrix(a, b, match_score=2, gap_cost=3):
     H = np.zeros((len(a) + 1, len(b) + 1), np.int)
     H_out = np.empty((len(a) + 1, len(b) + 1), np.int)
