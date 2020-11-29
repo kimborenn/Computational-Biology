@@ -75,11 +75,15 @@ def Hirschberg(a, b, match_score=2, gap_cost=3):
     else:
         amid = int(len(a) / 2)
 
-        H, H_out = NW(a[amid:], b)
+        H, H_out = NW(a[0:amid], b)
         ScoreL = H[amid]
-        H, H_out = NW((a[amid:][::-1]), b[::-1])
+        H, H_out = NW(a[amid:][::-1], b[::-1])
         ScoreR = H[amid]
-        bmid = max(ScoreL + ScoreR[::-1])
+
+        row = [l + r for l, r in zip(ScoreL, ScoreR[::-1])]
+        maxidx, maxval = max(enumerate(row), key=lambda a: a[1])
+
+        bmid = maxidx
 
         aligned_a_left, aligned_b_left = Hirschberg(a[:amid], b[:bmid])
         aligned_a_right, aligned_b_right = Hirschberg(a[amid:], b[bmid:])
